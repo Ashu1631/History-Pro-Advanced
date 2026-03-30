@@ -1,0 +1,33 @@
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+const quiz = quizData[id];
+
+let i = 0;
+let score = 0;
+
+function load(){
+  if(i >= quiz.length){
+    document.body.innerHTML = `
+      <h2>🎉 Quiz Finished</h2>
+      <h3>Your Score: ${score}/${quiz.length}</h3>
+    `;
+    return;
+  }
+
+  document.getElementById("q").innerText = quiz[i].q;
+
+  document.getElementById("a").innerText = quiz[i].options[0];
+  document.getElementById("b").innerText = quiz[i].options[1];
+  document.getElementById("c").innerText = quiz[i].options[2];
+}
+
+function check(x){
+  if(x === quiz[i].ans){
+    score++;
+  }
+  i++;
+  load();
+}
+
+load();
