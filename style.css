@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Detail</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="detail"></div>
+
+<button onclick="startQuiz()">🎮 Start Quiz</button>
+
+<script src="data.js"></script>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+const item = historyData.find(x=>x.id===id);
+
+document.getElementById("detail").innerHTML = `
+  <h1>${item.title}</h1>
+  <img src="${item.image}" width="300">
+
+  <ul>
+    ${item.points.map(p=>`<li>${p}</li>`).join("")}
+  </ul>
+`;
+
+function startQuiz(){
+  window.location = "quiz.html?id=" + id;
+}
+</script>
+
+</body>
+</html>
